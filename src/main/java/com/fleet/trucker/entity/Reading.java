@@ -1,5 +1,6 @@
 package com.fleet.trucker.entity;
 
+import java.util.Date;
 import java.util.UUID;
 
 import javax.persistence.CascadeType;
@@ -7,6 +8,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Reading {
@@ -22,8 +25,10 @@ public class Reading {
 
 	@Column(columnDefinition = "NUMBER(9,6)")
 	private double longitude;
-
-	private String timestamp;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date timestamp;
+	
 	private int fuelVolume;
 	private int speed;
 	private int engineHp;
@@ -71,11 +76,11 @@ public class Reading {
 		this.longitude = longitude;
 	}
 
-	public String getTimestamp() {
+	public Date getTimestamp() {
 		return timestamp;
 	}
 
-	public void setTimestamp(String timestamp) {
+	public void setTimestamp(Date timestamp) {
 		this.timestamp = timestamp;
 	}
 
@@ -141,6 +146,14 @@ public class Reading {
 
 	public void setTires(Tires tires) {
 		this.tires = tires;
+	}
+
+	@Override
+	public String toString() {
+		return "Reading [id=" + id + ", vin=" + vin + ", latitude=" + latitude + ", longitude=" + longitude
+				+ ", timestamp=" + timestamp + ", fuelVolume=" + fuelVolume + ", speed=" + speed + ", engineHp="
+				+ engineHp + ", checkEngineLightOn=" + checkEngineLightOn + ", engineCoolantLow=" + engineCoolantLow
+				+ ", cruiseControlOn=" + cruiseControlOn + ", engineRpm=" + engineRpm + ", tires=" + tires + "]";
 	}
 
 }

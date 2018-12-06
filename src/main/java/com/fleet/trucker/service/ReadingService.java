@@ -16,4 +16,6 @@ public interface ReadingService {
 	public Reading update(String id, Reading read);
 
 	public void delete(String id);
+
+	public List<String[]> findLastGeolocation(String vin);
 }

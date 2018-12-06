@@ -16,8 +16,10 @@ public interface AlertService {
 
 	public List<Alert> findAllByPriority(String priority);
 
-	public List<Alert> findAllByTimestamp(String timestamp);
+	public List<Alert> findAllByPriorityAndTimestamp(int priority);
 
 	public void create(Reading read);
+
+	public List<Alert> sortAllVehByAlert();
 
 }

@@ -16,7 +16,7 @@ public class RulesEngine {
 		if (read.getEngineRpm() > veh.getRedLineRpm()) {
 			alert = new Alert();
 			alert.setVin(read.getVin());
-			alert.setPriority(Priority.HIGH.toString());
+			alert.setPriority(Priority.HIGH.getN());
 			alert.setReadingType(ReadingType.HIGH_RPM.toString());
 			alert.setTimestamp(read.getTimestamp());
 			alert.setDescription("EngineRPM is greater than RedLineRPM");
@@ -29,7 +29,7 @@ public class RulesEngine {
 		if (read.getFuelVolume() < (0.10 * veh.getMaxFuelVolume())) {
 			alert = new Alert();
 			alert.setVin(read.getVin());
-			alert.setPriority(Priority.MED.toString());
+			alert.setPriority(Priority.MED.getN());
 			alert.setReadingType(ReadingType.LOW_FUEL.toString());
 			alert.setTimestamp(read.getTimestamp());
 			alert.setDescription("Fuel less than minimum threshold");
@@ -62,7 +62,7 @@ public class RulesEngine {
 		if(flag){
 			alert = new Alert();
 			alert.setVin(read.getVin());
-			alert.setPriority(Priority.LOW.toString());
+			alert.setPriority(Priority.LOW.getN());
 			alert.setReadingType(ReadingType.LOW_TIRE_PSI.toString());
 			alert.setTimestamp(read.getTimestamp());
 			alert.setDescription("Low Tire Pressure on " + tireName.toString());
@@ -75,7 +75,7 @@ public class RulesEngine {
 		if (read.isEngineCoolantLow()) {
 			alert = new Alert();
 			alert.setVin(read.getVin());
-			alert.setPriority(Priority.LOW.toString());
+			alert.setPriority(Priority.LOW.getN());
 			alert.setReadingType(ReadingType.LOW_COOLANT.toString());
 			alert.setTimestamp(read.getTimestamp());
 			alert.setDescription("Low Engine Coolant");
@@ -88,7 +88,7 @@ public class RulesEngine {
 		if (read.isCheckEngineLightOn()) {
 			alert = new Alert();
 			alert.setVin(read.getVin());
-			alert.setPriority(Priority.LOW.toString());
+			alert.setPriority(Priority.LOW.getN());
 			alert.setReadingType(ReadingType.CHECK_ENGINE_LIGHT_ON.toString());
 			alert.setTimestamp(read.getTimestamp());
 			alert.setDescription("Check Engine light is ON");

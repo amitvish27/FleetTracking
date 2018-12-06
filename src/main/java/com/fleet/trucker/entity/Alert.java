@@ -1,10 +1,13 @@
 package com.fleet.trucker.entity;
 
+import java.util.Date;
 import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Alert {
@@ -18,9 +21,11 @@ public class Alert {
 
 	private String description;
 	
-	private String timestamp;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date timestamp;
 	
-	private String priority;
+	@Column(columnDefinition = "NUMBER(1)")
+	private int priority;
 
 	private String readingType;
 	
@@ -52,19 +57,19 @@ public class Alert {
 		this.description = description;
 	}
 
-	public String getTimestamp() {
+	public Date getTimestamp() {
 		return timestamp;
 	}
 
-	public void setTimestamp(String timestamp) {
+	public void setTimestamp(Date timestamp) {
 		this.timestamp = timestamp;
 	}
 
-	public String getPriority() {
+	public int getPriority() {
 		return priority;
 	}
 
-	public void setPriority(String priority) {
+	public void setPriority(int priority) {
 		this.priority = priority;
 	}
 

@@ -1,5 +1,6 @@
 package com.fleet.trucker.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,17 +29,20 @@ public class ReadingServiceImpl implements ReadingService {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Reading findById(String id) {
 		return repository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Reading with id {" + id + " } not found"));
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<Reading> findAllByVin(String vin) {
 		return (List<Reading>) repository.findAllByVin(vin);
 	}
 
 	@Override
+	@Transactional
 	public Reading create(Reading read) {
 		Optional<Reading> exists = repository.findById(read.getId());
 		if (exists.isPresent()) {
@@ -50,6 +54,7 @@ public class ReadingServiceImpl implements ReadingService {
 	}
 
 	@Override
+	@Transactional
 	public Reading update(String id, Reading read) {
 		Optional<Reading> exists = repository.findById(read.getId());
 		if (!exists.isPresent()) {
@@ -60,9 +65,31 @@ public class ReadingServiceImpl implements ReadingService {
 	}
 
 	@Override
+	@Transactional
 	public void delete(String id) {
 		Reading exists = repository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Reading with id {" + id + "} does not exists"));
 		repository.delete(exists);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<String[]> findLastGeolocation(String vin) {
+		final List<String[]> list = new ArrayList<>();
+		if(findAllByVin(vin).isEmpty()){
+			throw new ResourceNotFoundException("Readings for vin {" + vin + "} does not exists");
+		} else {
+			List<Reading> result = repository.findLastGeolocation(vin);
+			result.iterator().forEachRemaining(r->{
+				String[] array = new String[5];
+				array[0] = r.getId();
+				array[1] = r.getVin();
+				array[2] = String.valueOf(r.getLatitude());
+				array[3] = String.valueOf(r.getLongitude());
+				array[4] = r.getTimestamp().toString();
+				list.add(array);
+			});
+		}
+		return list;
 	}
 }
