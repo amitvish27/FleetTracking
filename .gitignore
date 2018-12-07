@@ -8,7 +8,10 @@
 
 **/.settings
 **/.metadata
+**/.classpath
+**/.project
 **/Servers
 **/RemoteSystemsTempFiles
 
 **/target/*
+
