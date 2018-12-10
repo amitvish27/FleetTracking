@@ -75,7 +75,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<mainClass>org.tutorial.spring_boot.Application</mainClass>
+					<mainClass>com.fleet.trucker.TruckerApplication</mainClass>
 					<excludeDevtools>false</excludeDevtools>
 				</configuration>
 				<executions>
