@@ -28,14 +28,13 @@ node{
 	}
 
 	stage("docker service") {
-		//create the service if it doesn't exists otherwise just updated the image
+		//create the service if it doesn't exists otherwise just updated the image --env spring.profiles.active=prod \
 		try {
 			sh """
 				if [\$(docker service ls --filter name=${DOCKER_SERVICE_ID} --quiet | wc -l) -eq 0]; then
 					docker service create \
 					--replicas 1 \
 					--name ${DOCKER_SERVICE_ID} \
-					--env spring.profiles.active=prod \
 					${DOCKER_REPO}:${DOCKER_IMAGE_VERSION}
 				else 
 					docker service update \
